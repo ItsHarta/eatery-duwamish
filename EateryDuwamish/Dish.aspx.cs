@@ -57,7 +57,6 @@ namespace EateryDuwamish
             ddlDishType.SelectedValue = DEFAULT_DDL_VALUE;
         }
         #endregion
-
         #region DATA TABLE MANAGEMENT
         private void LoadDishTable()
         {
@@ -80,9 +79,13 @@ namespace EateryDuwamish
                 LinkButton lbDishName = (LinkButton)e.Item.FindControl("lbDishName");
                 Literal litDishType = (Literal)e.Item.FindControl("litDishType");
                 Literal litPrice = (Literal)e.Item.FindControl("litPrice");
+                LinkButton lbRecipe = (LinkButton)e.Item.FindControl("lbRecipe");
 
                 lbDishName.Text = dish.DishName;
                 lbDishName.CommandArgument = dish.DishID.ToString();
+
+                lbRecipe.Text = "Recipes";
+                lbRecipe.CommandArgument = dish.DishID.ToString();
 
                 DishTypeData DishType = new DishTypeSystem().GetDishTypeByID(dish.DishTypeID);
                 litDishType.Text = DishType.DishTypeName;
@@ -113,9 +116,13 @@ namespace EateryDuwamish
                 pnlFormDish.Visible = true;
                 txtDishName.Focus();
             }
+            else if(e.CommandName == "TO_RECIPE")
+            {
+                int DishID = Convert.ToInt32(e.CommandArgument.ToString());
+                Response.Redirect("Recipe.aspx?DishID=" + DishID);
+            }
         }
         #endregion
-
         #region BUTTON EVENT MANAGEMENT
         protected void btnSave_Click(object sender, EventArgs e)
         {
@@ -158,7 +165,6 @@ namespace EateryDuwamish
             }
         }
         #endregion
-
         #region NOTIFICATION MANAGEMENT
         private void ShowNotificationIfExists()
         {
