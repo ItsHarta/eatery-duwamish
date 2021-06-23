@@ -64,3 +64,8 @@ CHANGELOG:
     - get ingredient by ingredient id
   - added recipe page and codebehind (aspx)
   - prevent recipe page to be accessed without parameter
+- 23/06
+  - altered dish delete procedure:
+    - execute delete recipes with the same dish id
+  - altered recipe delete procedure:
+    - delete ingredients with the same recipe id
